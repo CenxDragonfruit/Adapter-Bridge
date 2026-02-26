@@ -103,6 +103,6 @@ Os padrões de projeto Adapter e Bridge são ferramentas indispensáveis para o 
 
 ## 🧑‍💻 Autor
 
-**Bruno Henrique, Vytor Henrique, Lucas Nogueira**
-**ADS 3º Período 2026**
-**IFRO Campus Porto Velho Calama**
+*  **Bruno Henrique, Vytor Henrique, Lucas Nogueira**
+*  **ADS 3º Período - 2026**
+*  **IFRO Campus Porto Velho Calama**
