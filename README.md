@@ -86,7 +86,7 @@ Os exemplos práticos deste repositório foram desenvolvidos em **Python**.
 
 1.  Clone o repositório em sua máquina.
 2.  Navegue até o diretório desejado (`Adapter` ou `Bridge`).
-3.  Execute o arquivo de inicialização via terminal (ex: `python main.py`).
+3.  Execute o arquivo de inicialização via terminal ou IDE.
 
 ---
 
