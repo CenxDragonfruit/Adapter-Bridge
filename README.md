@@ -1,99 +1,92 @@
-Padrões de Projeto Estruturais: Adapter e Bridge
+# Padrões de Projeto Estruturais: Adapter e Bridge
 
-Este repositório contém implementações práticas e documentação teórica sobre os Padrões de Projeto Adapter e Bridge. Este trabalho foi desenvolvido com fins acadêmicos para a disciplina de Padrões de Projeto.
+Este repositório contém implementações práticas e documentação teórica sobre os Padrões de Projeto **Adapter** e **Bridge**. Este trabalho foi desenvolvido com fins acadêmicos.
 
-Contexto Acadêmico
+## 🎓 Contexto Acadêmico
 
-    Instituição: Instituto Federal de Rondônia (IFRO) - Campus Porto Velho Calama 
+| Informação | Detalhe |
+| :--- | :--- |
+| **Instituição** | Instituto Federal de Rondônia (IFRO) - Campus Porto Velho Calama |
+| **Disciplina** | Padrões de Projeto |
+| **Docente** | Me. Leandro Ferrarezi Valiante |
+| **Discentes** | Bruno Henrique, Lucas Nogueira, Vytor Henrique |
 
-Disciplina: Padrões de Projeto 
+---
 
-Docente: Me. Leandro Ferrarezi Valiante 
+## 📖 1. Introdução aos Padrões de Projeto
 
-Discentes: Bruno Henrique, Lucas Nogueira, Vytor Henrique 
+O conceito de padrões de projeto nasceu com Christopher Alexander, que criou uma "linguagem de padrões" para resolver problemas repetitivos de planejamento urbano e construções físicas. A ideia foi trazida para a computação por quatro autores (Erich Gamma, John Vlissides, Ralph Johnson e Richard Helm). Em 1994, eles lançaram o livro *"Padrões de Projeto - Soluções Reutilizáveis de Software Orientado a Objetos"*, apresentando 23 soluções padronizadas para resolver problemas comuns na programação orientada a objetos.
 
-1. Introdução aos Padrões de Projeto
+Os padrões de projeto dividem-se em três categorias principais:
 
-O conceito de padrões de projeto nasceu com Christopher Alexander, que criou uma linguagem de padrões para resolver problemas repetitivos de planejamento urbano e construções físicas. A ideia foi trazida para a computação pela "Gang of Four" (Erich Gamma, John Vlissides, Ralph Johnson e Richard Helm), que catalogou 23 soluções para problemas comuns na programação orientada a objetos.
+*   **Criacionais:** Fornecem vários mecanismos de criação de objetos, que aumentam a flexibilidade.
+*   **Estruturais:** Explicam como montar objetos e classes em estruturas maiores, mantendo essas estruturas flexíveis e eficientes. (Nesta categoria estão *Adapter* e *Bridge*).
+*   **Comportamentais:** Voltados aos algoritmos e à atribuição de responsabilidades entre objetos.
 
-Os padrões de projeto são soluções típicas e reutilizáveis para problemas comuns no design de software. Eles se dividem em três categorias principais:
+---
 
-    Criacionais: Focados em mecanismos de criação de objetos.
+## 🌉 2. O Padrão Bridge (Ponte)
 
-Estruturais: Explicam como montar objetos e classes em estruturas maiores, mantendo-as flexíveis e eficientes (nesta categoria estão Adapter e Bridge).
+O **Bridge** é um padrão estrutural que serve para dividir uma classe muito complexa em duas partes separadas: a abstração e a implementação.
 
-Comportamentais: Voltados aos algoritmos e à atribuição de responsabilidades entre objetos.
+### O Problema
+A principal motivação do Bridge é evitar a explosão combinatória de classes. Imagine classes de Formas (Círculo, Quadrado) e Cores (Vermelho, Azul). Usando herança, teríamos classes específicas para cada combinação (como Círculo Vermelho ou Quadrado Azul), e adicionar uma nova forma ou cor faria o número de classes multiplicar absurdamente.
 
-2. O Padrão Bridge (Ponte)
+### A Solução
+O Bridge extrai uma das dimensões (como Cor) para uma hierarquia de classes separada e faz a Forma apontar para ela.
 
-O Bridge é um padrão estrutural que serve para dividir uma classe muito complexa em duas partes separadas: a abstração e a implementação.
+### Vantagens e Desvantagens
 
-O Problema
+| Vantagens | Desvantagens |
+| :--- | :--- |
+| O código cliente trabalha com abstrações em alto nível, não ficando exposto a detalhes de plataforma. | Pode tornar o código mais complicado ao aplicar o padrão em uma classe que já é altamente coesa. |
+| Permite criar aplicações independentes de plataforma. | |
 
-A principal motivação do Bridge é evitar a explosão combinatória de classes. Imagine classes de Formas (Círculo, Quadrado) e Cores (Vermelho, Azul). Usando herança simples, teríamos classes combinadas para cada variação. Adicionar uma nova forma ou cor faria o número de classes multiplicar absurdamente.
+### Quando NÃO usar
+*   **Projetos pequenos:** A criação de toda a arquitetura de interfaces gera arquivos inúteis e complexidade desnecessária para projetos simples.
+*   **Requisitos incertos:** O padrão exige definir a separação correta logo no início; se a arquitetura inicial estiver errada, a refatoração terá um alto custo.
 
-A Solução
+---
 
-O Bridge resolve isso extraindo uma das dimensões (como Cor) para uma hierarquia de classes separada e faz a Forma apontar para ela via composição.
+## 🔌 3. O Padrão Adapter (Adaptador)
 
-Vantagens e Desvantagens
+O **Adapter** é um padrão estrutural que permite objetos com interfaces incompatíveis colaborarem entre si, atuando como um "tradutor".
 
-    Vantagens: Permite criar classes e aplicações independentes de plataforma. O código cliente trabalha com abstrações em alto nível, não ficando exposto a detalhes de plataforma.
+### O Problema
+A principal motivação é integrar classes existentes, sistemas legados ou bibliotecas de terceiros sem precisar alterar o código original delas. Imagine que a sua aplicação baixa dados no formato XML, mas a equipe precisa integrar uma biblioteca de análise de terceiros que só aceita dados no formato JSON.
 
-Desvantagens: Pode tornar o código mais complicado ao aplicar o padrão em uma classe altamente coesa.
+### A Solução
+Cria-se um Adaptador que implementa a interface que a Aplicação entende (XML). Esse Adaptador recebe a chamada contendo o XML, traduz os dados para uma estrutura JSON e repassa o pedido para acionar a biblioteca de análises corretamente.
 
-Quando não usar
+### Vantagens e Desvantagens
 
-    Projetos pequenos: A criação de toda a arquitetura de interfaces gera arquivos inúteis e complexidade desnecessária para projetos simples.
+| Vantagens | Desvantagens |
+| :--- | :--- |
+| Você pode separar a conversão de interface da lógica primária do negócio. | A complexidade geral do código aumenta porque você precisa introduzir um conjunto de novas interfaces e classes. |
+| É possível introduzir novos adaptadores sem quebrar o código cliente existente. | |
 
-Requisitos incertos: O Bridge exige definir a separação correta das classes logo no início; se a arquitetura inicial estiver errada, a refatoração terá um alto custo.
+### Quando NÃO usar
+*   **Controle total do código:** Não é recomendado quando a equipe tem acesso e controle total sobre o código de ambas as partes; nesses casos, a refatoração das classes para padronizar as interfaces é a melhor solução.
 
-3. O Padrão Adapter (Adaptador)
+---
 
-O Adapter é um padrão de projeto estrutural que permite que objetos com interfaces incompatíveis colaborem entre si, atuando como um "tradutor".
+## 🚀 4. Executando o Projeto
 
-O Problema
+Os exemplos práticos deste repositório foram desenvolvidos em **Python**.
 
-A principal motivação é integrar classes existentes, sistemas legados ou bibliotecas de terceiros sem precisar alterar o código original delas. Imagine que o sistema baixa dados em formato XML, mas a equipe precisa usar uma biblioteca de análise de terceiros que só aceita dados em formato JSON.
+*   📁 **Pasta Adapter:** Contém a implementação e exemplos do padrão Adapter.
+*   📁 **Pasta Bridge:** Contém a implementação e exemplos do padrão Bridge.
 
-A Solução
+### Para rodar localmente:
 
-Cria-se um Adaptador que implementa a interface que o Cliente entende (XML). O Adaptador recebe a chamada, traduz os dados para a estrutura exigida (JSON) e repassa o pedido para acionar o Serviço (biblioteca de análises) corretamente.
+1.  Clone o repositório em sua máquina.
+2.  Navegue até o diretório desejado (`Adapter` ou `Bridge`).
+3.  Execute o arquivo de inicialização via terminal (ex: `python main.py`).
 
-Vantagens e Desvantagens
+---
 
-    Vantagens: Separa a conversão de interface ou de dados da lógica primária do negócio. Permite introduzir novos tipos de adaptadores sem quebrar o código cliente existente.
+## 📚 5. Referências Bibliográficas
 
-Desvantagens: A complexidade geral do código aumenta porque você precisa introduzir novas interfaces e classes.
-
-Quando não usar
-
-    Controle total do código: Não é recomendado quando a equipe tem acesso e controle total sobre o código de ambas as partes. Nesses casos, refatorar para padronizar as interfaces é a melhor solução.
-
-4. Estrutura do Repositório e Execução
-
-Os exemplos práticos foram desenvolvidos em Python.
-
-A estrutura do projeto é a seguinte:
-
-    Pasta Adapter: Implementação e exemplos do padrão Adapter.
-
-    Pasta Bridge: Implementação e exemplos do padrão Bridge.
-
-    Arquivo README.md: Documentação teórica e técnica.
-
-Como testar localmente:
-
-    Clone este repositório para o seu computador.
-
-    Navegue pelo terminal até o diretório desejado (Adapter ou Bridge).
-
-    Execute o arquivo principal utilizando o comando: python main.py.
-
-5. Referências Bibliográficas
-
-    GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. Padrões de projeto: soluções reutilizáveis de software orientado a objetos. Porto Alegre: Bookman, 2000.
-
-SHVETS, Alexander. Padrões de projeto. Refactoring.Guru. Disponível em: https://refactoring.guru/pt-br/design-patterns.
-
-COIMBRA, Gustavo. Design Patterns: o segredo para projetos de software duradouros e flexíveis. DIO, 2025.
+1.  GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. **Padrões de projeto: soluções reutilizáveis de software orientado a objetos**. Porto Alegre: Bookman, 2000.
+2.  SHVETS, Alexander. **Padrões de projeto**. Refactoring. Guru, [s.d.]. Disponível em: [https://refactoring.guru/pt-br/design-patterns](https://refactoring.guru/pt-br/design-patterns).
+3.  COIMBRA, Gustavo. **Design Patterns: o segredo para projetos de software duradouros e flexíveis**. DIO, 17 mar. 2025.
