@@ -43,8 +43,9 @@ O Bridge extrai uma das dimensões (como Cor) para uma hierarquia de classes sep
 | Permite criar aplicações independentes de plataforma. | |
 
 ### Quando NÃO usar
-*   **Projetos pequenos:** A criação de toda a arquitetura de interfaces gera arquivos inúteis e complexidade desnecessária para projetos simples.
-*   **Requisitos incertos:** O padrão exige definir a separação correta logo no início; se a arquitetura inicial estiver errada, a refatoração terá um alto custo.
+*   **Projetos pequenos:** Não é recomendado para sistemas simples e estáticos. A criação de toda a arquitetura de interfaces e pontes gera arquivos inúteis e complexidade desnecessária para o projeto.
+*   **Foco em leitura rápida:** Deve ser evitado quando a equipe precisa entender o código de imediato. O padrão fragmenta a lógica, obrigando os desenvolvedores a buscarem o código real em vários arquivos diferentes.
+*   **Requisitos incertos:** Não é indicado para projetos que mudam constantemente. O Bridge exige definir a separação correta das classes logo no início; se as regras mudarem e a arquitetura inicial estiver errada, a refatoração terá um alto custo.
 
 ---
 
@@ -64,6 +65,10 @@ Cria-se um Adaptador que implementa a interface que a Aplicação entende (XML).
 | :--- | :--- |
 | Você pode separar a conversão de interface da lógica primária do negócio. | A complexidade geral do código aumenta porque você precisa introduzir um conjunto de novas interfaces e classes. |
 | É possível introduzir novos adaptadores sem quebrar o código cliente existente. | |
+
+### Problemas Comuns
+*   **Uso Excessivo:** Ocorre quando o desenvolvedor cria adaptadores para conectar sistemas internos que ele mesmo controla, em vez de simplesmente refatorar o código para que tenham a mesma interface.
+*   **Adaptadores de Duas Vias:** Quando dois sistemas precisam falar um com o outro usando interfaces diferentes, criar um adaptador que funcione em ambas as direções pode gerar um código extremamente complexo e difícil de manter.
 
 ### Quando NÃO usar
 *   **Controle total do código:** Não é recomendado quando a equipe tem acesso e controle total sobre o código de ambas as partes; nesses casos, a refatoração das classes para padronizar as interfaces é a melhor solução.
